@@ -26,7 +26,7 @@ Using scikit-learn's `MinMaxScaler`, I scale the training data between 0 and 1. 
 
 ### Training Model
 
-We then train the model using the TensorFlow library. A sequential model is setup that uses a Gaussian noise layer to reduce overfitting, followed by an LSTM layer with 64 neurons and a dense layer with 1 neuron. The number of neurons in the LSTM layer can be varied to the users liking. I choose to use 300 Epochs and a batch size of 1 which may slow the training time, however I prioritise accuracy. We use a mean-squared-error loss function and have a variable learning rate using the `adam` optimizer.
+We then train the model using the TensorFlow library. A sequential model is setup that uses a Gaussian noise layer to reduce overfitting, followed by an LSTM layer with 64 neurons and a dense layer with 1 neuron. The number of neurons in the LSTM layer can be varied to the users liking. I choose to use 50 Epochs and a batch size of 1 which may slow the training time, however I prioritise accuracy. We use a mean-squared-error loss function and have a variable learning rate using the `adam` optimizer. More Epochs can be used for more accurate results.
 
 ### Algorithm
 
@@ -40,15 +40,24 @@ While this works much better without transaction costs, we would like to see how
 
 ### Predictions
 
-![Algo_Predictions](https://github.com/user-attachments/assets/10688678-5396-4653-85ff-37ae52192dbd)
+![Algo_Predictions](https://github.com/user-attachments/assets/18a99618-cfe6-452b-bf1e-3848be8ea99f)
 
-![Algo_Test_Predictions](https://github.com/user-attachments/assets/389d5c0b-e932-43be-8a7d-b0bbcb0713d0)
+![Algo_Test_Predictions](https://github.com/user-attachments/assets/3afa2e67-f1bb-4708-b4cf-edb1e12a1680)
+
+### Accuracy Metrics
+
+- Mean Absolute Error (MAE) : 1.68
+- Mean Squared Error (MSE) : 4.15
+- Root Mean Squared Error (RMSE) : 2.04
+- $R^2$ : 0.82
 
 ### Algorithmic Strategy
 
-![Algo_Signals](https://github.com/user-attachments/assets/1ad6f894-a7fb-42f5-a5e2-e4a9f6723832)
+We outperform the buy and hold strategy.
 
-![Algo_PnL](https://github.com/user-attachments/assets/19cf8282-e80f-463d-bd4e-848d69d4d87f)
+![Algo_Signals](https://github.com/user-attachments/assets/6e655b6b-2554-4384-94f2-fc381ec2e10d)
+
+![Algo_PnL](https://github.com/user-attachments/assets/7f803f85-c653-4516-aaad-19de1443b42d)
 
 ## Instructions
 
