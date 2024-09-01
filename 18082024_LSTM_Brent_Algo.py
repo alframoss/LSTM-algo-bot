@@ -83,7 +83,7 @@ for i in range(test.shape[0]):
 # Construct neural network using LSTM architecture.
 
 LSTM_NEURONS = 64
-EPOCHS = 300
+EPOCHS = 50
 
 std = df["Adj Close BZ=F - 0"].pct_change().dropna().std()
 
@@ -195,6 +195,8 @@ predicted_price = y_test_hat[:, 0]
 actual_price = df["Open BZ=F - 0"].iloc[int(noRows * (TRAIN_SPLIT + VAL_SPLIT)) + 1 :].values
 exit_price = df["Open BZ=F - 0"].iloc[int(noRows * (TRAIN_SPLIT + VAL_SPLIT)) + 1 :].shift(-1).values
 
+buyhold_strat = np.zeros([int(noRows * (1 - TRAIN_SPLIT - VAL_SPLIT)) - 1])
+
 # Using an artificial transaction cost based on the standard deviation of the Brent open price.
 
 BASPREAD = df["Open BZ=F - 0"].pct_change().dropna().std()
@@ -226,6 +228,7 @@ for i in range(int(noRows * (1 - TRAIN_SPLIT - VAL_SPLIT)) - 1):
             sell_exit[i] = S1 * exit + BASPREAD
             sell_plot[i] = curr
             sell_small[i] = curr
+    buyhold_strat[i] = (-actual_price[0]+actual_price[i]) * 100
 
 # Compute alpha generated and plot illustrative graphs.
 
@@ -257,9 +260,11 @@ plt.legend()
 plt.show()
 
 plt.figure(figsize=(15, 6))
-plt.plot(pnl, color=blmbg_black, linewidth=2)
+plt.plot(pnl, label="Mean Reversion Algorithm", color=blmbg_black, linewidth=2)
+plt.plot(buyhold_strat, label="Buy & Hold Strategy", color=blmbg_or, linewidth=2)
 plt.title("LSTM Mean Reversion Algorithm PnL")
 plt.xlabel("Day")
 plt.ylabel("PnL")
+plt.legend(loc="upper left")
 # plt.savefig("Algo_PnL.png", dpi=400)
 plt.show()
