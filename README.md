@@ -28,6 +28,10 @@ Using scikit-learn's `MinMaxScaler`, I scale the training data between 0 and 1. 
 
 We then train the model using the TensorFlow library. A sequential model is setup that uses a Gaussian noise layer to reduce overfitting, followed by an LSTM layer with 64 neurons and a dense layer with 1 neuron. The number of neurons in the LSTM layer can be varied to the users liking. I choose to use 50 Epochs and a batch size of 1 which may slow the training time, however I prioritise accuracy. We use a mean-squared-error loss function and have a variable learning rate using the `adam` optimizer. More Epochs can be used for more accurate results.
 
+### Regularisation
+
+I use L1 (LASSO) regularisation to the weights which aims to reduce weights by adding a penalty for the absolute value of weights. Dropouts and early stopping can also be used.
+
 ### Algorithm
 
 Using this prediction, I construct a mean-reverting trade strategy. If we predict that the price of Brent will increase, we long. If we predict that the price of Brent will decrease, we short. The size of the postion depends on how far the predicted price deviates from the current open price of Brent.
