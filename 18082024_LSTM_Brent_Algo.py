@@ -5,7 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-from keras import layers, Sequential, Input
+from keras import layers, Sequential, Input, regularizers
 
 START_DATE = dt.datetime.now() - dt.timedelta(days=365 * 10)
 END_DATE = dt.datetime.now()
@@ -91,7 +91,7 @@ model = Sequential(
     [
         Input(shape=(SEQUENCE_LENGTH, noFeats)),
         layers.GaussianNoise(std),
-        layers.LSTM(units=LSTM_NEURONS),
+        layers.LSTM(units=LSTM_NEURONS, kernel_regularizer=regularizers.L1(l1=0.01)),
         layers.Dense(units=1),
     ]
 )
